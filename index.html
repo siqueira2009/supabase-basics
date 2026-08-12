@@ -3,47 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Database</title>
+    <title>Students Data Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Students Data Managment</h1>
+        <h1>Students Data Management</h1>
     </header>
 
     <main>
         <form>
             <div id="inputs">
                 <div class="inputGroup">
-                    <label>Nome do aluno<span class="required">*</span></label>
+                    <label>Student's name<span class="required">*</span></label>
                     <input required placeholder="Lucas de Souza Siqueira"/>
                 </div>
     
                 <div class="inputGroup">
-                    <label>Email do aluno<span class="required">*</span></label>
+                    <label>Student's email<span class="required">*</span></label>
                     <input required placeholder="lucas.s.siqueira.2009@gmail.com"/>
                 </div>
     
                 <div class="inputGroup">
-                    <label>Sala do aluno<span class="required">*</span></label>
+                    <label>Student's class<span class="required">*</span></label>
                     <input required placeholder="2º DS (AMS) - Tarde"/>
                 </div>
     
                 <div class="inputGroup">
-                    <label>Nascimento do aluno</label>
+                    <label>Student's birth date</label>
                     <input type="date"/>
                 </div>
             </div>
 
             <button type="submit">
-                Registrar aluno
+                Register student
             </button>
         </form>
-        
+
+        <div class="hr"></div>
+
+        <div id="registredStudents">
+            <h1>Registred Students</h1>
+
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Class</th>
+                    <th>Birth date</th>
+                </tr>
+            </table>
+        </div>
     </main>
 
     <footer>
         <h2>Feito por <a href="https://www.linkedin.com/in/lucasdesouzasiqueira/" target="_blank">Lucas Siqueira</a></h2>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
 </body>
 </html>
