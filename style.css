@@ -1,0 +1,127 @@
+@import url('https://fonts.cdnfonts.com/css/cabinet-grotesk');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    width: 100dvw;
+    height: 100dvh;
+    background-color: #fdfdfd;
+    color: black;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 2px black solid;
+}
+
+header > h1 {
+    font-size: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Main + Formulário */
+
+main {
+    padding: 30px;
+    flex: 1;
+}
+
+form {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+#inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    
+    width: 70%;
+    margin: 0 auto;
+}
+
+input {
+    height: 60px;
+    padding: 5px;
+    padding-left: 15px;
+    background-color: white;
+    border: 1px #000 solid;
+    outline: 0;
+    border-radius: 12px;
+    font-size: 20px;
+
+    transition: all 0.3s;
+}
+
+input:focus {
+    box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.08);
+}
+
+input::placeholder {
+    font-weight: 500;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.inputGroup > label {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.inputGroup > label > .required {
+    color: rgb(246, 64, 64);
+}
+
+form > button[type="submit"] {
+    width: 25%;
+    padding: 10px;
+    font-size: 22px;
+    border-radius: 12px;
+    border: 1px #000 solid;
+    background-color: white;
+    cursor: pointer;
+
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+form > button[type="submit"]:hover {
+    width: 50%;
+    border-radius: 50px;
+}
+
+/* Footer */
+
+footer {
+    height: 80px;
+    border-top: 1px #000 solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > h2 {
+    font-weight: 500;
+}
+
+footer > h2 > a{
+    color: rgb(55, 55, 249);
+}
