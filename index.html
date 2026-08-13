@@ -43,10 +43,12 @@
         <div class="hr"></div>
 
         <div id="registredStudents">
+            <button id="refreshTable">Refresh 🔃</button>
+
             <h1>Registred Students</h1>
 
             <table>
-                <tr>
+                <tr id="tableHeader">
                     <th>Name</th>
                     <th>Email</th>
                     <th>Class</th>
@@ -61,6 +63,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

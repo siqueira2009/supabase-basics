@@ -135,7 +135,20 @@ footer > h2 > a{
 
 /* Alunos cadastrados */
 
+#refreshTable {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    font-size: 20px;
+    border: 1px #dddddd solid;
+    padding: 3px 5px;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 #registredStudents {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 15px;
