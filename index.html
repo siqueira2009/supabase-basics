@@ -18,23 +18,23 @@
         <form>
             <div id="inputs">
                 <div class="inputGroup">
-                    <label>Student's name<span class="required">*</span></label>
-                    <input required placeholder="Lucas de Souza Siqueira"/>
+                    <label for="name">Student's name<span class="required">*</span></label>
+                    <input id="name" required name="name" type="text" placeholder="Lucas de Souza Siqueira" autocomplete="name"/>
                 </div>
     
                 <div class="inputGroup">
-                    <label>Student's email<span class="required">*</span></label>
-                    <input required placeholder="lucas.s.siqueira.2009@gmail.com"/>
+                    <label for="email">Student's email<span class="required">*</span></label>
+                    <input id="email" required name="email" type="email" placeholder="lucas.s.siqueira.2009@gmail.com" autocomplete="email"/>
                 </div>
     
                 <div class="inputGroup">
-                    <label>Student's class<span class="required">*</span></label>
-                    <input required placeholder="2º DS (AMS) - Tarde"/>
+                    <label for="class">Student's class</label>
+                    <input id="class" name="class" type="text" placeholder="2º DS (AMS) - Tarde"/>
                 </div>
     
                 <div class="inputGroup">
-                    <label>Student's birth date</label>
-                    <input type="date"/>
+                    <label for="birth">Student's birth date<span class="required">*</span></label>
+                    <input id="birth" required name="birth" type="date" autocomplete="bday"/>
                 </div>
             </div>
 
