@@ -1,95 +1,90 @@
-import * as reqs from '../utils/reqs.js';
+import * as reqs from '../utils/reqs.js'; // Importa as funções que fazem requisições ao Supabase
+import * as config from '../utils/config.js'; // Importa as funções de configurações de conexão Supabase
 
-const SUPABASE_URL = "https://kjqgvlonlkodstytmdev.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_6Yv5Jp_RYe5Yhf8v_ynJKg_CDrYkQ0j";
+import * as tableUtils from '../utils/table.js'; // Importa as funções utilitárias das tabelas 
 
+// Função para criar os ícones Lucide
 function createIcons() {
     lucide.createIcons();
 }
 
-// Função que cria uma conexão com o Supabase
-async function createConnection() {
-    // Cria e retorna um objeto que faz requisições HTTP
-    // Usam os valores no header
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    return client;
-}
-
+// Função que atualiza a tabela de listagem de alunos
 async function updateTable(client) {
+    // Pega todos os alunos do banco
     const students = await reqs.getStudents(client);
+    
+    // Seleciona os elementos necessários (tabela e linhas)
     const table = document.querySelector('table');
-
     const tr = document.querySelectorAll('tr');
 
+    // Para cada linha, apaga ela (menos o cabeçalho)
     tr.forEach(tr => {
         if (tr.id != "tableHeader") {
             tr.remove();
         }
     })
 
+    // Para cada estudante...
     for (let i = 0; i < students.length; i++) {
+        // Cria uma linha
         const tr = document.createElement('tr');
-        const nameTd = document.createElement('td');
-        const emailTd = document.createElement('td');
-        const classTd = document.createElement('td');
-        const birthTd = document.createElement('td');
+
+        // Cria um elemento de dado para cada valor, usando a função auxiliar
+        const nameTd = tableUtils.createTableData(students[i].name, 'dataTd', 'name');
+        const emailTd = tableUtils.createTableData(students[i].email, 'dataTd', 'email');
+        const classTd = tableUtils.createTableData(students[i].class, 'dataTd', 'class');
+        const birthTd = tableUtils.createTableData(students[i].birth_date, 'dataTd', 'birth_date');
+
+        // Cria o elemento de deletar usuário
         const deleteTd = document.createElement('td');
 
-        nameTd.textContent = students[i].name;
-        nameTd.classList.add('dataTd');
-        nameTd.dataset.col = 'name';
-
-        emailTd.textContent = students[i].email;
-        emailTd.classList.add('dataTd');
-        emailTd.dataset.col = 'email';
-
-        classTd.textContent = students[i].class;
-        classTd.classList.add('dataTd');
-        classTd.dataset.col = 'class';
-
-        birthTd.textContent = students[i].birth_date;
-        birthTd.classList.add('dataTd');
-        birthTd.dataset.col = 'birth_date';
-
+        // Adiciona o conteúdo dentro dele
         deleteTd.innerHTML = "<i data-lucide='trash-2'></i>"
         deleteTd.classList.add('deleteTd');
 
+        // Adiciona o ID do estudante na linha
         tr.dataset.studentId = students[i].id;
 
-        tr.appendChild(nameTd);
-        tr.appendChild(emailTd);
-        tr.appendChild(classTd);
-        tr.appendChild(birthTd);
-        tr.appendChild(deleteTd);
+        // Adiciona os itens no TR, usando a função auxiliar
+        const items = [nameTd, emailTd, classTd, birthTd, deleteTd];
+        tableUtils.appendData(tr, items);
 
         table.appendChild(tr);
-
     }
     
-    createIcons();
-    deleteTdListener(client);
-    editTdListener(client);
+    createIcons(); // Recria os ícones (por causa da lixeira)
+    deleteTdListener(client); // Adiciona o evento de deletar estudante
+    editTdListener(client); // Adiciona o evento de atualizar estudante
 }
 
+// Função responsável pela deleção de usuários
 function deleteTdListener(client) {
+    // Pega todos os ícones de deleção
     const deleteTds = document.querySelectorAll('.deleteTd svg');
 
+    // Para cada um adiciona um eventListener que...
     deleteTds.forEach(td => {
         td.addEventListener('click', async () => {
             const id = Number(td.closest('tr').dataset.studentId);
     
+            // Faz a requisição de delete usuário com o ID e atualiza a tabela
             const result = await reqs.deleteStudent(client, id);
             updateTable(client);
         });
     });
 }
 
+// Função responsável por editar dados dos usuários
 function editTdListener(client) {
+    // Pega todos os campos de dados
     const dataTds = document.querySelectorAll('td.dataTd');
 
+    // Para campo de dado
     dataTds.forEach(dataTd => {
+        // Adiciona um eventListener de clique que...
         dataTd.addEventListener('click', () => {
+
+            // Substitui ele por um input
             if (dataTd.querySelector('input')) return;
             
             const prevValue = dataTd.textContent.trim();
@@ -99,9 +94,11 @@ function editTdListener(client) {
             dataTd.textContent = "";
             dataTd.appendChild(input);
             input.focus();
-            input.setSelectionRange(input.value.length, input.value.length);
 
+            // Quando tiver foco tirado dele, chama a função de salvar valor
             input.addEventListener('blur', () => saveValue(client, input, dataTd, prevValue));
+
+            // Quando tem Enter clicado, atualiza também
             input.addEventListener('keydown', (e) => {
                 if (e.key == "Enter") {
                     input.blur();
@@ -112,31 +109,43 @@ function editTdListener(client) {
     });
 }
 
+// Função responsável por salvar o novo valor do input
 async function saveValue(client, input, td, prevValue) {
+    // Pega os dados necessários
     const newValue = input.value.trim();
     const col = td.dataset.col;
     const id = Number(td.closest('tr').dataset.studentId);
 
+    // Se não tiver coluna ou id ou os valores forem iguais
     if ((!col || !id) || newValue == prevValue) {
-        td.textContent = prevValue;
+        td.textContent = prevValue; // Não muda nada
         return;
     }
 
+    // Faz a requisição para atualizar os valores
     const res = await reqs.updateStudent(client, col, newValue, id);
 
+    // Se der erro, volta ao estado anterior
+    // Essa parte nem é tão necessária, já que a tabela seria atualizada logo embaixo
     if (res == null) {
         td.textContent = prevValue;
         return;
     }
 
+    // Depois atualiza a tabela
     updateTable(client);
 }
 
+
+// Adiciona um eventListenter no documento para quando ele for carregado
 document.addEventListener("DOMContentLoaded", async () => {
+    // Dá um alerta
     alert("Olá! Bem vindo ao painel de administrador.\n\nClique na lixeira para apagar um estudante e clique em algum dado da tabela para editá-lo.")
    
+    // Cria os ícones Lucide
     createIcons();
 
-    const client = await createConnection();
-    updateTable(client);
+    // Configura um cliente do Supabase
+    const client = await config.createConnection();
+    updateTable(client); // Atualiza a tabela
 });
