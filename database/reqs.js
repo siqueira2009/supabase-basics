@@ -46,8 +46,28 @@ async function deleteStudent(client, id) {
     }  
 }
 
+async function updateStudent(client, field, value, id) {
+    try {
+        const payload = {}
+        payload[field] = value
+
+        const { data, error } = await client.from('students').update(payload).eq('id', id).select();
+
+        if (error) {
+            throw error;
+        } else {
+            return data;
+        }
+    } catch (error) {
+        console.log(`[DELETE STUDENTS] Error while trying to delete student:`);
+        console.error(error);
+        return null;
+    }  
+}
+
 export {
     getStudents,
     postStudents,
-    deleteStudent
+    deleteStudent,
+    updateStudent
 }
