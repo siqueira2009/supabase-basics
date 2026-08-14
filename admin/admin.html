@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Data Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Students Data Management</h1>
+        <a id="adminPanel" href="../index.html">
+            <i data-lucide="grid-3x2" width="32px" height="32px"></i>
+        </a>
+    </header>
+
+    <main>
+        <div id="registredStudents">
+            <button id="refreshTable">Refresh <i data-lucide="rotate-cw" width="20px"></i></button>
+
+            <h1>Registred Students</h1>
+
+            <table>
+                <tr id="tableHeader">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Class</th>
+                    <th>Birth date</th>
+                    <th>/</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <h2>Feito por <a href="https://www.linkedin.com/in/lucasdesouzasiqueira/" target="_blank">Lucas Siqueira</a></h2>
+    </footer>
+
+    <script type="module" src="./script.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</body>
+</html>

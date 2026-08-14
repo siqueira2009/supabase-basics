@@ -30,7 +30,24 @@ async function postStudents(client, student) {
     } 
 }
 
+async function deleteStudent(client, id) {
+    try {
+        const {data, error} = await client.from('students').delete().eq('id', id);
+
+        if (error) {
+            throw error;
+        } else {
+            return data;
+        }
+    } catch (error) {
+        console.log(`[DELETE STUDENTS] Error while trying to delete student:`);
+        console.error(error);
+        return null;
+    }  
+}
+
 export {
     getStudents,
-    postStudents
+    postStudents,
+    deleteStudent
 }
