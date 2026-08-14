@@ -23,7 +23,7 @@ async function updateTable(client) {
     const tr = document.querySelectorAll('tr');
 
     tr.forEach(tr => {
-        if (tr.id != "tableHeader") {
+        if (tr.dataset.studentId != "tableHeader") {
             tr.remove();
         }
     })
@@ -56,7 +56,7 @@ async function updateTable(client) {
         deleteTd.innerHTML = "<i data-lucide='trash-2'></i>"
         deleteTd.classList.add('deleteTd');
 
-        tr.id = students[i].id;
+        tr.dataset.studentId = students[i].id;
 
         tr.appendChild(nameTd);
         tr.appendChild(emailTd);
@@ -66,9 +66,9 @@ async function updateTable(client) {
 
         table.appendChild(tr);
 
-        createIcons();
     }
-
+    
+    createIcons();
     deleteTdListener(client);
     editTdListener(client);
 }
@@ -78,7 +78,7 @@ function deleteTdListener(client) {
 
     deleteTds.forEach(td => {
         td.addEventListener('click', async () => {
-            const id = Number(td.closest('tr').id);
+            const id = Number(td.closest('tr').dataset.studentId);
     
             const result = await reqs.deleteStudent(client, id);
             updateTable(client);
@@ -116,7 +116,7 @@ function editTdListener(client) {
 async function saveValue(client, input, td, prevValue) {
     const newValue = input.value.trim();
     const col = td.dataset.col;
-    const id = Number(td.closest('tr').id);
+    const id = Number(td.closest('tr').dataset.studentId);
 
     if ((!col || !id) || newValue == prevValue) {
         td.textContent = prevValue;
