@@ -35,7 +35,6 @@ async function updateTable(client) {
         const classTd = document.createElement('td');
         const birthTd = document.createElement('td');
         const deleteTd = document.createElement('td');
-        const editTd = document.createElement('td');
 
         nameTd.textContent = students[i].name;
         nameTd.classList.add('dataTd');
