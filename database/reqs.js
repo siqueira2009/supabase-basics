@@ -1,3 +1,5 @@
+import { createWarn } from "../index/script.js";
+
 async function getStudents(client) {
     try {
         const {data, error} = await client.from('students').select('*').order('created_at', {ascending: false});
@@ -8,6 +10,8 @@ async function getStudents(client) {
             return data;
         }
     } catch (error) {
+        createWarn('Erro ao criar alunos', error.message)
+
         console.log(`[GET STUDENTS] Error while trying to get students:`);
         console.error(error);
         return null;

@@ -74,6 +74,16 @@ function refreshListener(client) {
     refreshTable.addEventListener('click', () => updateTable(client))
 }
 
+export function createWarn(title, message) {
+    const warnDiv = document.getElementById('warn');
+    warnDiv.innerHTML = `<h2>${title}</h2><p>${message}</p>`;
+    warnDiv.style.display = 'block';
+    
+    setTimeout(() => {
+        warnDiv.style.display = 'none';
+    }, 5500);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const client = await createConnection();
     updateTable(client);

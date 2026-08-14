@@ -23,7 +23,7 @@ async function updateTable(client) {
     const tr = document.querySelectorAll('tr');
 
     tr.forEach(tr => {
-        if (tr.dataset.studentId != "tableHeader") {
+        if (tr.id != "tableHeader") {
             tr.remove();
         }
     })
