@@ -136,16 +136,26 @@ async function saveValue(client, input, td, prevValue) {
     updateTable(client);
 }
 
+// Função que adiciona um eventListener para atualizar a tabela
+function refreshListener(client) {
+    // Pega o botão de atualizar a tabela
+    const refreshTable = document.getElementById('refreshTable');
+
+    // Quando clica, chama a função de atualizar a tabela
+    refreshTable.addEventListener('click', () => updateTable(client))
+}
 
 // Adiciona um eventListenter no documento para quando ele for carregado
 document.addEventListener("DOMContentLoaded", async () => {
     // Dá um alerta
     alert("Olá! Bem vindo ao painel de administrador.\n\nClique na lixeira para apagar um estudante e clique em algum dado da tabela para editá-lo.")
-   
-    // Cria os ícones Lucide
-    createIcons();
-
+       
     // Configura um cliente do Supabase
     const client = await config.createConnection();
-    updateTable(client); // Atualiza a tabela
+    updateTable(client); // Atualiza a tabela logo de cara
+    
+    refreshListener(client); // EventListener de atualizar tabela
+
+    // Cria os ícones Lucide
+    createIcons();
 });

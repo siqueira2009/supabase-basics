@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./index/style.css">
 </head>
 <body>
+
+    <!-- Header da página -->
     <header>
         <h1>Students Data Creator</h1>
         <a id="adminPanel" href="./admin/admin.html">
@@ -14,7 +16,9 @@
         </a>
     </header>
 
+    <!-- Conteúdo principal da página -->
     <main>
+        <!-- Formulário -->
         <form>
             <div id="inputs">
                 <div class="inputGroup">
@@ -43,8 +47,10 @@
             </button>
         </form>
 
+        <!-- Linha divisora -->
         <div class="hr"></div>
 
+        <!-- Tabela com os alunos registrados -->
         <div id="registredStudents">
             <button id="refreshTable">Refresh <i data-lucide="rotate-cw" width="20px"></i></button>
 
@@ -61,18 +67,18 @@
         </div>
     </main>
 
+    <!-- Aviso vazio -->
     <div id="warn">
     </div>
 
+    <!-- Rodapé da página -->
     <footer>
         <h2>Feito por <a href="https://www.linkedin.com/in/lucasdesouzasiqueira/" target="_blank">Lucas Siqueira</a></h2>
     </footer>
     
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Importação dos scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script type="module" src="./index/script.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="./script.js"></script>
 </body>
 </html>
