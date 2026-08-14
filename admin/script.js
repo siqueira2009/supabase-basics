@@ -1,4 +1,4 @@
-import * as reqs from '../database/reqs.js';
+import * as reqs from '../utils/reqs.js';
 
 const SUPABASE_URL = "https://kjqgvlonlkodstytmdev.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_6Yv5Jp_RYe5Yhf8v_ynJKg_CDrYkQ0j";
@@ -35,7 +35,6 @@ async function updateTable(client) {
         const classTd = document.createElement('td');
         const birthTd = document.createElement('td');
         const deleteTd = document.createElement('td');
-        const editTd = document.createElement('td');
 
         nameTd.textContent = students[i].name;
         nameTd.classList.add('dataTd');
@@ -56,7 +55,7 @@ async function updateTable(client) {
         deleteTd.innerHTML = "<i data-lucide='trash-2'></i>"
         deleteTd.classList.add('deleteTd');
 
-        tr.id = students[i].id;
+        tr.dataset.studentId = students[i].id;
 
         tr.appendChild(nameTd);
         tr.appendChild(emailTd);
@@ -66,9 +65,9 @@ async function updateTable(client) {
 
         table.appendChild(tr);
 
-        createIcons();
     }
-
+    
+    createIcons();
     deleteTdListener(client);
     editTdListener(client);
 }
@@ -78,7 +77,7 @@ function deleteTdListener(client) {
 
     deleteTds.forEach(td => {
         td.addEventListener('click', async () => {
-            const id = Number(td.closest('tr').id);
+            const id = Number(td.closest('tr').dataset.studentId);
     
             const result = await reqs.deleteStudent(client, id);
             updateTable(client);
@@ -116,7 +115,7 @@ function editTdListener(client) {
 async function saveValue(client, input, td, prevValue) {
     const newValue = input.value.trim();
     const col = td.dataset.col;
-    const id = Number(td.closest('tr').id);
+    const id = Number(td.closest('tr').dataset.studentId);
 
     if ((!col || !id) || newValue == prevValue) {
         td.textContent = prevValue;
