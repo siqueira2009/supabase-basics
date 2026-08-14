@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Data Management</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Students Data Creator</title>
+    <link rel="stylesheet" href="./index/style.css">
 </head>
 <body>
     <header>
-        <h1>Students Data Management</h1>
+        <h1>Students Data Creator</h1>
+        <a id="adminPanel" href="./admin/admin.html">
+            <i data-lucide="cog" width="35" height="35" stroke-width="1.5"></i>
+        </a>
     </header>
 
     <main>
@@ -43,10 +46,12 @@
         <div class="hr"></div>
 
         <div id="registredStudents">
+            <button id="refreshTable">Refresh <i data-lucide="rotate-cw" width="20px"></i></button>
+
             <h1>Registred Students</h1>
 
             <table>
-                <tr>
+                <tr id="tableHeader">
                     <th>Name</th>
                     <th>Email</th>
                     <th>Class</th>
@@ -59,8 +64,12 @@
     <footer>
         <h2>Feito por <a href="https://www.linkedin.com/in/lucasdesouzasiqueira/" target="_blank">Lucas Siqueira</a></h2>
     </footer>
-
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+    <script type="module" src="./index/script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
