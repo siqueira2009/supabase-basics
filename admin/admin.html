@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Header da página -->
     <header>
         <h1>Students Data Management</h1>
         <a id="adminPanel" href="../index.html">
@@ -15,7 +17,9 @@
         </a>
     </header>
 
+    <!-- Conteúdo principal da página -->
     <main>
+        <!-- Tabela com os alunos registrados -->
         <div id="registredStudents">
             <button id="refreshTable">Refresh <i data-lucide="rotate-cw" width="20px"></i></button>
 
@@ -33,13 +37,16 @@
         </div>
     </main>
 
+    <!-- Aviso vazio -->
     <div id="warn">
     </div>
 
+    <!-- Rodapé da página -->
     <footer>
         <h2>Feito por <a href="https://www.linkedin.com/in/lucasdesouzasiqueira/" target="_blank">Lucas Siqueira</a></h2>
     </footer>
 
+    <!-- Importação dos scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script type="module" src="./script.js"></script>
