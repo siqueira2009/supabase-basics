@@ -1,4 +1,4 @@
-import { createWarn } from "../index/script.js";
+import { createWarn } from "./warn.js";
 
 async function getStudents(client) {
     try {
@@ -10,7 +10,7 @@ async function getStudents(client) {
             return data;
         }
     } catch (error) {
-        createWarn('Erro ao criar alunos', error.message)
+        createWarn('Erro ao exibir alunos', error.message);
 
         console.log(`[GET STUDENTS] Error while trying to get students:`);
         console.error(error);
@@ -28,6 +28,8 @@ async function postStudents(client, student) {
             return data;
         }
     } catch (error) {
+        createWarn('Erro ao criar alunos', error.message);
+
         console.log(`[POST STUDENTS] Error while trying to post student(s):`);
         console.error(error);
         return null;
@@ -44,6 +46,8 @@ async function deleteStudent(client, id) {
             return data;
         }
     } catch (error) {
+        createWarn('Erro ao excluir alunos', error.message);
+
         console.log(`[DELETE STUDENTS] Error while trying to delete student:`);
         console.error(error);
         return null;
@@ -63,6 +67,8 @@ async function updateStudent(client, field, value, id) {
             return data;
         }
     } catch (error) {
+        createWarn('Erro ao atualizar alunos', error.message);
+
         console.log(`[DELETE STUDENTS] Error while trying to delete student:`);
         console.error(error);
         return null;

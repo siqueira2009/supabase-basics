@@ -1,4 +1,4 @@
-import * as reqs from '../database/reqs.js';
+import * as reqs from '../utils/reqs.js';
 
 const SUPABASE_URL = "https://kjqgvlonlkodstytmdev.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_6Yv5Jp_RYe5Yhf8v_ynJKg_CDrYkQ0j";
@@ -72,16 +72,6 @@ function refreshListener(client) {
     const refreshTable = document.getElementById('refreshTable');
 
     refreshTable.addEventListener('click', () => updateTable(client))
-}
-
-export function createWarn(title, message) {
-    const warnDiv = document.getElementById('warn');
-    warnDiv.innerHTML = `<h2>${title}</h2><p>${message}</p>`;
-    warnDiv.style.display = 'block';
-    
-    setTimeout(() => {
-        warnDiv.style.display = 'none';
-    }, 5500);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

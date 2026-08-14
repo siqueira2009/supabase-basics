@@ -168,3 +168,26 @@ footer > h2 {
 footer > h2 > a{
     color: rgb(55, 55, 249);
 }
+
+/* Warn */
+
+#warn {
+    display: none;
+    padding: 20px;
+
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 30%;
+    border: 2px solid #dddddd;
+    background-color: #f4f4f4;
+    border-radius: 12px;
+
+    animation: popup 0.5s ease-in-out;
+    transition: opacity 0.3s;
+}
+
+@keyframes popup {
+    from { top: -300px }
+    to { top: 10px }
+}
